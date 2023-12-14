@@ -1,7 +1,7 @@
-import 'package:agriconnect/login_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:agriconnect/services/registerUser.dart'; // Import the registerUser service
-import 'package:agriconnect/models/user_model.dart'; // Import the UserModel class
+import 'package:agriconnect/login_screen.dart';
+import 'package:agriconnect/services/registerUser.dart';
+import 'package:agriconnect/models/user_model.dart';
 
 class Register extends StatelessWidget {
   const Register({Key? key}) : super(key: key);
@@ -285,13 +285,13 @@ class __FormContentState extends State<_FormContent> {
                           ),
                         ),
                       ),
-                      onPressed: () {
+                      onPressed: () async {
                         if (_formKey.currentState?.validate() ?? false) {
                           // Call the registerUser function with the UserModel instance
-                          registerUser(_user);
+                          bool registrationSuccessful = await registerUser(_user);
 
                           // Perform additional action after registration
-                          _performAfterRegistration();
+                          _performAfterRegistration(registrationSuccessful, context);
                         }
                       },
                     ),
@@ -326,9 +326,53 @@ class __FormContentState extends State<_FormContent> {
   }
 
   // Additional action after registration
-  void _performAfterRegistration() {
-    // Add your desired action here
-    print('Registration successful! Perform additional action.');
+  void _performAfterRegistration(bool registrationSuccessful, BuildContext context) {
+    if (registrationSuccessful) {
+      // If registration is successful, show a success popup
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Registration Successful'),
+            content: Text('Thank you for registering!'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  // Navigate to the login screen after showing the popup
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SignInPage2(),
+                    ),
+                  );
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      // If registration fails, show a verification popup
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Verification Failed'),
+            content: Text('Please verify your information and try again.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   Widget _gap() => const SizedBox(height: 16);
