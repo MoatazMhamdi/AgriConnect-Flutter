@@ -1,5 +1,7 @@
 import 'package:agriconnect/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:agriconnect/services/registerUser.dart'; // Import the registerUser service
+import 'package:agriconnect/models/user_model.dart'; // Import the UserModel class
 
 class Register extends StatelessWidget {
   const Register({Key? key}) : super(key: key);
@@ -52,11 +54,6 @@ class _Logo extends StatelessWidget {
     final bool isSmallScreen = MediaQuery.of(context).size.width < 600;
 
     return Container(
-      /*  width: isSmallScreen ? double.infinity : null,
-      decoration: BoxDecoration(
-        color: Colors.white54,
-        borderRadius: BorderRadius.circular(10),
-      ),*/
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -115,6 +112,14 @@ class __FormContentState extends State<_FormContent> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  // Initialize a UserModel instance to store form data
+  late UserModel _user = UserModel(
+    name: '',
+    email: '',
+    password: '',
+    numTel: '',
+  );
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -130,7 +135,7 @@ class __FormContentState extends State<_FormContent> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Register', // Add your title here
+              'Register',
               style: TextStyle(
                 color: Colors.black87,
                 fontFamily: 'Montserrat',
@@ -150,9 +155,11 @@ class __FormContentState extends State<_FormContent> {
                       if (value == null || value.isEmpty) {
                         return 'Please enter some text';
                       }
-
-
                       return null;
+                    },
+                    onChanged: (value) {
+                      // Update the name in the UserModel instance
+                      _user = _user.copyWith(name: value);
                     },
                     decoration: const InputDecoration(
                       labelText: 'Name',
@@ -174,8 +181,11 @@ class __FormContentState extends State<_FormContent> {
                       if (!emailValid) {
                         return 'Please enter a valid email';
                       }
-
                       return null;
+                    },
+                    onChanged: (value) {
+                      // Update the email in the UserModel instance
+                      _user = _user.copyWith(email: value);
                     },
                     decoration: const InputDecoration(
                       labelText: 'Email',
@@ -190,10 +200,11 @@ class __FormContentState extends State<_FormContent> {
                       if (value == null || value.isEmpty) {
                         return 'Please enter some text';
                       }
-
-
-
                       return null;
+                    },
+                    onChanged: (value) {
+                      // Update the phone number in the UserModel instance
+                      _user = _user.copyWith(numTel: value);
                     },
                     decoration: const InputDecoration(
                       labelText: '+216',
@@ -213,6 +224,10 @@ class __FormContentState extends State<_FormContent> {
                         return 'Password must be at least 6 characters';
                       }
                       return null;
+                    },
+                    onChanged: (value) {
+                      // Update the password in the UserModel instance
+                      _user = _user.copyWith(password: value);
                     },
                     obscureText: !_isPasswordVisible,
                     decoration: InputDecoration(
@@ -272,12 +287,11 @@ class __FormContentState extends State<_FormContent> {
                       ),
                       onPressed: () {
                         if (_formKey.currentState?.validate() ?? false) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SignInPage2(),
-                            ),
-                          );
+                          // Call the registerUser function with the UserModel instance
+                          registerUser(_user);
+
+                          // Perform additional action after registration
+                          _performAfterRegistration();
                         }
                       },
                     ),
@@ -309,6 +323,12 @@ class __FormContentState extends State<_FormContent> {
         ),
       ),
     );
+  }
+
+  // Additional action after registration
+  void _performAfterRegistration() {
+    // Add your desired action here
+    print('Registration successful! Perform additional action.');
   }
 
   Widget _gap() => const SizedBox(height: 16);
