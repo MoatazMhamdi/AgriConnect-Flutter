@@ -53,6 +53,10 @@ flutter:
     - assets/logo_black.png
     - assets/bgg.jpg
     - assets/bggg.jpg
+    - assets/forgetpass.png
+    - assets/forgot-password.png
+    - assets/otp.png
+    - assets/reset.png
   fonts:
     - family: Montserrat
       fonts:

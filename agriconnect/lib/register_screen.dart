@@ -164,7 +164,7 @@ class __FormContentState extends State<_FormContent> {
                     decoration: const InputDecoration(
                       labelText: 'Name',
                       hintText: 'Enter your Name',
-                      prefixIcon: Icon(Icons.supervised_user_circle),
+                      prefixIcon: Icon(Icons.account_circle_outlined),
                       border: OutlineInputBorder(),
                     ),
                   ),

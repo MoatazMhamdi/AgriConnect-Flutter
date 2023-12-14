@@ -1,10 +1,18 @@
-import 'package:flutter/material.dart';
-import 'ProfilePage1.dart'; // Import your ProfilePage1 view
-import 'register_screen.dart';
-import 'package:agriconnect/ForgetPassword.dart'; // Import your ForgetPassword screen
 
-class SignInPage2 extends StatelessWidget {
-  const SignInPage2({Key? key}) : super(key: key);
+
+
+
+
+
+
+
+
+import 'package:flutter/material.dart';
+import 'register_screen.dart';
+import 'OTP.dart';
+
+class ForgetPassword extends StatelessWidget {
+  const ForgetPassword({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -57,30 +65,7 @@ class _Logo extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Image.asset(
-              'assets/logo_black.png',
-              width: isSmallScreen ? 150 : 300,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              "Welcome to AgriConnect World!",
-              textAlign: TextAlign.center,
-              style: isSmallScreen
-                  ? Theme.of(context).textTheme.headline6?.copyWith(
-                fontSize: 16,
-                fontWeight: FontWeight.normal,
-              )
-                  : Theme.of(context).textTheme.headline5?.copyWith(
-                color: Colors.black87,
-                fontFamily: 'Montserrat',
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-          ),
+
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
@@ -126,13 +111,33 @@ class __FormContentState extends State<_FormContent> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Image.asset(
+                'assets/forgot-password.png',
+             //   width: isSmallScreen ? 150 : 300,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                "Forget Password",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black87,
+                  fontFamily: 'Montserrat',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
+                ),
+              ),
+            ),
             Text(
-              'LOGIN',
+              'Enter your phone number',
               style: TextStyle(
                 color: Colors.black87,
                 fontFamily: 'Montserrat',
-                fontWeight: FontWeight.bold,
-                fontSize: 17,
+                fontWeight: FontWeight.normal,
+                fontSize: 14,
               ),
             ),
             _gap(),
@@ -165,74 +170,7 @@ class __FormContentState extends State<_FormContent> {
                     ),
                   ),
                   _gap(),
-                  TextFormField(
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
 
-                      if (value.length < 6) {
-                        return 'Password must be at least 6 characters';
-                      }
-                      return null;
-                    },
-                    obscureText: !_isPasswordVisible,
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      hintText: 'Enter your password',
-                      prefixIcon: const Icon(Icons.lock_outline_rounded),
-                      border: const OutlineInputBorder(),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _isPasswordVisible
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _isPasswordVisible = !_isPasswordVisible;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                  _gap(),
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: _rememberMe,
-                        onChanged: (value) {
-                          if (value == null) return;
-                          setState(() {
-                            _rememberMe = value;
-                          });
-                        },
-                      ),
-                      Text('Remember me'),
-                      Spacer(),
-                      TextButton(
-                        onPressed: () {
-                          // Navigate to ForgetPassword screen
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ForgetPassword(),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          'Forgot Password?',
-                          style: TextStyle(
-                            color: Colors.black87,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.normal,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  _gap(),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -248,7 +186,7 @@ class __FormContentState extends State<_FormContent> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ProfilePage1(),
+                              builder: (context) => OTP(),
                             ),
                           );
                         }
@@ -256,7 +194,7 @@ class __FormContentState extends State<_FormContent> {
                       child: const Padding(
                         padding: EdgeInsets.all(10.0),
                         child: Text(
-                          'Sign in',
+                          'Submit',
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.white,
@@ -278,11 +216,11 @@ class __FormContentState extends State<_FormContent> {
                       );
                     },
                     child: Text(
-                      'Create an account!',
+                      'Sign In!',
                       style: TextStyle(
                         color: Colors.black87,
                         fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.normal,
+                        fontWeight: FontWeight.bold,
                         fontSize: 14,
                       ),
                     ),
