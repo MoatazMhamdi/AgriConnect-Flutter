@@ -1,0 +1,200 @@
+{
+   "checksum": "700351aed27716b1ed78cd5557664460",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "13296616911078668",
+            "date_last_used": "0",
+            "guid": "81f23274-8942-4b50-86c1-81e91f45c98a",
+            "id": "7",
+            "name": "Shahid",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://shahid.mbc.net/en/series/Al-Kabeer-Awi-season-6-episode-18/episode-941559"
+         }, {
+            "date_added": "13304092234739086",
+            "date_last_used": "0",
+            "guid": "3f6097bd-3f7c-4b07-8f94-3a8814392ce0",
+            "id": "8",
+            "name": "(1) كورس جافا سكريبت #2 | اين تكتب الجافاسكريبت؟ - YouTube",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://www.youtube.com/watch?v=-xL3LXBiGfw&list=PLknwEmKsW8OuTqUDaFRBiAViDZ5uI3VcE&index=2"
+         }, {
+            "date_added": "13304185903294030",
+            "date_last_used": "0",
+            "guid": "eb45932f-5062-4bb9-b784-f5ff205f008d",
+            "id": "9",
+            "name": "انواع البيانات - Nouvil",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://nouvil.net/courses/javascript/lesson/%d8%a7%d9%86%d9%88%d8%a7%d8%b9-%d8%a7%d9%84%d8%a8%d9%8a%d8%a7%d9%86%d8%a7%d8%aa-3/"
+         }, {
+            "date_added": "13304295924402904",
+            "date_last_used": "13338260564542407",
+            "guid": "da76cbd1-b6f1-4c8a-b826-6146a2e436a9",
+            "id": "10",
+            "name": "المتغيرات - Nouvil",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://nouvil.net/courses/javascript/lesson/%d8%a7%d9%84%d9%85%d8%aa%d8%ba%d9%8a%d8%b1%d8%a7%d8%aa-2/"
+         }, {
+            "date_added": "13304800531482576",
+            "date_last_used": "0",
+            "guid": "31104564-ab7c-49e9-9a7d-c58b9d1eed4b",
+            "id": "11",
+            "name": "Planning - Google Sheets",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://docs.google.com/spreadsheets/d/184TuixsRO5Yrf6qOBD037ceZb4dzDoZjzdIuhfJr6r0/edit#gid=2020088333"
+         }, {
+            "date_added": "13304800539269296",
+            "date_last_used": "0",
+            "guid": "c0985a62-9e47-4a61-9e1b-bba14d93ce4b",
+            "id": "12",
+            "name": "Detailed Action plan - Google Docs",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://docs.google.com/document/d/1igjrTcwTmKLtdL0Q33YUiLbbK0Oz-OzYDChEJwE3boE/edit"
+         }, {
+            "date_added": "13308572369077996",
+            "date_last_used": "0",
+            "guid": "34187899-5fd7-4f25-83fb-99fe207c7439",
+            "id": "13",
+            "name": "Facebook",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://www.facebook.com/"
+         }, {
+            "date_added": "13309795638249630",
+            "date_last_used": "0",
+            "guid": "5e07a21f-9140-4039-a87b-c85758acc1a6",
+            "id": "14",
+            "name": "Meet – htj-uoth-qok",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://meet.google.com/htj-uoth-qok?fbclid=IwAR1OJEhvRFe9yET7xkRhUpSJs4Nypki4m8dOOptYJNTL7-YYa9VfFrCNQmw"
+         }, {
+            "date_added": "13311123111749695",
+            "date_last_used": "0",
+            "guid": "726a1702-efc7-44fb-8410-bc2199ef8934",
+            "id": "15",
+            "name": "Meet – woa-cgck-xgu",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://meet.google.com/woa-cgck-xgu"
+         }, {
+            "date_added": "13311537846808804",
+            "date_last_used": "0",
+            "guid": "17bcd76d-df5d-40fc-b9d7-24c6015dd4b1",
+            "id": "16",
+            "name": "Free Grammar Checker | Writer",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://writer.com/grammar-checker/?fbclid=IwAR2Utb947JR4wOCLqcL4uasUGP_ioemROkvhZ7EuH-o7iTzVGZS-FUTYW9k"
+         }, {
+            "date_added": "13311537851352543",
+            "date_last_used": "0",
+            "guid": "23124c8d-b27f-4c39-9551-5470e9f4e8d9",
+            "id": "17",
+            "name": "Paraphrasing Tool | QuillBot AI",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://quillbot.com/?fbclid=IwAR22dG1Osvp0ydi3jvK2pX8sQa3L3YlwZOW36YE1sds2Tpi55Cl15gjbtF4"
+         }, {
+            "date_added": "13311625106836516",
+            "date_last_used": "0",
+            "guid": "02f3311f-7b78-48f9-86f4-fcf14376b4f3",
+            "id": "18",
+            "name": "Grammarly: Free Online Writing Assistant",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://www.grammarly.com/a?utm_source=youtube&utm_medium=cpc&utm_phase=student&utm_campaign=bts2022-prospecting&utm_content=brent-90s-bts22&gclid=Cj0KCQjwwfiaBhC7ARIsAGvcPe4QIn8p1QnFXurCf1iMfBPlhTJaXlx1MGz45skWuELrP86NhC5EWD0aAuBxEALw_wcB"
+         }, {
+            "date_added": "13312243451455688",
+            "date_last_used": "0",
+            "guid": "558b46c3-e16a-4208-817d-16108ea31845",
+            "id": "19",
+            "name": "مبارة يوفنتوس و انتر ميلان الدوري الإيطالي بث مباشر بتاريخ 2022-11-06 - kooora2day",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://kora-club.com/home/matche/77093"
+         }, {
+            "date_added": "13314328934965496",
+            "date_last_used": "0",
+            "guid": "579e459d-15c9-4d58-8bcf-dd74ff01dea1",
+            "id": "20",
+            "name": "Résultats de recherche - moataz.mhamdi@esprit.tn - Messagerie esprit",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://mail.google.com/mail/u/0/?pli=1#search/calendrier?projector=1"
+         }, {
+            "date_added": "13314330162126472",
+            "date_last_used": "0",
+            "guid": "0446aebc-0afa-43b0-a2c4-f985fbc0b4c0",
+            "id": "21",
+            "name": "Budget - Google Sheets",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://docs.google.com/spreadsheets/d/1r9CB0JtdPn5DSGJvsaaBsGTBbDC0KWoiMXxRwWfeD2g/edit#gid=0"
+         }, {
+            "date_added": "13316193598763131",
+            "date_last_used": "0",
+            "guid": "3370228c-c1c1-4690-8a80-c953c8e9378c",
+            "id": "22",
+            "name": "Communications materials - United Nations Sustainable Development",
+            "show_icon": false,
+            "source": "sync",
+            "type": "url",
+            "url": "https://www.un.org/sustainabledevelopment/news/communications-material/"
+         } ],
+         "date_added": "13348021512192048",
+         "date_last_used": "0",
+         "date_modified": "13316193598763131",
+         "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
+         "id": "1",
+         "name": "Barre des favoris",
+         "source": "unknown",
+         "type": "folder"
+      },
+      "other": {
+         "children": [  ],
+         "date_added": "13348021512192059",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
+         "id": "2",
+         "name": "Autres favoris",
+         "source": "unknown",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13348021512192062",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
+         "id": "3",
+         "name": "Favoris de l’appareil mobile",
+         "source": "unknown",
+         "type": "folder"
+      }
+   },
+   "sync_metadata": "CkEKHgiIgQISCE1SXKOMAQAAKg4QABgBIBQoBjAAOABAABIAIAEqGHpibVkrMU9Mam9SVzI1VFJjYU4ya2c9PaAGDBKpAQgWEqQBChx3Vm9abE4yK0s1QXF0WWd1UUs1NFpTTjVwa009EiQzMzcwMjI4Yy1jMWMxLTQ2OTAtOGE4MC1jOTUzYzhlOTM3OGMYACAAKAAwl8LAqtUwOPTFwKrVMED0xcCq1TBKHDhlYzFIMDlUSHFCMDg4dFJsa1hYaG1PL0dGdz1aICIe//5EMytDaU0wTTJLOExrVmRiYmY3ZTI4d3lqWTA9ZZNMI2kSqQEIFRKkAQocb0NXTk8rMVd1KzJkWmplOW1na21LLzZxRWtjPRIkMDQ0NmFlYmMtMGFmYS00M2IwLWEyYzQtZjk4NWZiYzBiNGMwGAAgACgAMJXCwKrVMDi1xcCq1TBAtcXAqtUwShx2eUNWZkFvQXFXWDlhdlRkaVhsdzVvNjhxUEE9WiAiHv/9OCtqMzNTS2NUa0haUm9zVWZLQWVFWUpSNDBZPWWgZtvoEqkBCBQSpAEKHHB0KzFCc1NGUURwSzJkOGNYbGtvV0szT2dMUT0SJDU3OWU0NTlkLTE1YzktNGQ1OC04YmNmLWRkNzRmZjAxZGVhMRgAIAAoADCWwsCq1TA41cXAqtUwQNXFwKrVMEocaytSdVRPeUppeTY2eGJzL2FMbTBOTm11NWNZPVogIh7/+1FBS1J3L2NjZGpmRzdxZHRrL0V6UjNkOUprTT1li6CM0RKpAQgSEqQBChxJZzlPdGI2aDNERUtWb0MyTVU2OVFPenRjTW89EiQwMmYzMzExZi03Yjc4LTQ4ZjktODZmNC1mY2YxNDM3NmI0ZjMYACAAKAAwk8LAqtUwOIfFwKrVMECHxcCq1TBKHDBtZ1I0ZkduOTEzT2QyOHlXN21yTExDRVB3ST1aICIe/+x6WjgvZ25pUy9LdytVL2t5UktOWjFBNVJ6bGM9ZST5qHoSqQEIExKkAQocTGZXQlhmbkFtOVNkN0lGVng4SlRaZ1NIM0xVPRIkNTU4YjQ2YzMtZTE2YS00MjA4LTgxN2QtMTYxMDhlYTMxODQ1GAAgACgAMJHCwKrVMDjYxMCq1TBA2MTAqtUwShx4aUw0cGV4a3FWMzZMOWVnKzJCM2NZQStqNGc9WiAiHv/2ZmF5QnBKOFZnSkFaSXpsVUtxRms2R05NQVFJPWUAAAAAEqgBCA8SowEKHEpzQS8ybEd1enZmVDdpd0xTVWFaWlNNbGRPTT0SJDcyNmExNzAyLWVmYzctNDRmYi04NDEwLWJjMjE5OWVmODkzNBgAIAIoAjDS/PmayjE4psXAqtUwQNTv+ZrKMUocSDdQSWhBZnZjcmNxaWw4UCttNVVSKzZHdXRRPVofIh3/ZXhGZ1liQXJ5RzF6MzR6VHhGZ2xRSTRwblNvPWX0IvUbEqkBCBASpAEKHGlZV3V0SFFod2xsODRka0g3VDllVmN1ZVpWQT0SJDE3YmNkNzZkLWRmNWQtNDBmYy1iOWQ3LTI0YzYwMTVkZDRiMRgAIAIoAjDU/PmayjE4u8PAqtUwQNTv+ZrKMUocWS9sZDU0azZPdisybmpBcUdjTFlISGNWK2NNPVogIh7/skRiRlgrYnhBWWNka0FwVEsrYUo4NDc4aWVlaz1laOvmABKoAQgNEqMBChw1RTBWVEVRaHVIREJPK2JLdUd5a0FxcWZpYm89EiQzNDE4Nzg5OS01ZmQ3LTRmMjUtODNmYi05OWZlMjA3Yzc0MzkYACACKAIw0Pz5msoxOOfEwKrVMEDT7/mayjFKHGM4dW9uL2xlMmxwS3hlMVUvN2YwNDc0L3V2VT1aHyId/W5IbHVjMk84ZDBzTWg2eEc3UEJpalM3ZXdXTT1lxJF2xRKpAQgREqQBChxvWmRIVktSNUFNQWx2Tm5LK0cxVGhnS01Hakk9EiQyMzEyNGM4ZC1iMjdmLTRjMzktOTU1MS01NDcwZTlmNGU4ZDkYACAAKAAwisLAqtUwOI3DwKrVMECNw8Cq1TBKHDRHT3JHYW4vRWxwQVNsOGFkODRFcHJhOGFFQT1aICIe/9lhMC91QytSVUlxcU16V1dqVlFTMmlkU1hDbzA9ZaNgav0SiQEIAxKEAQocbmpnRHU4OGVDcnZYcDg2cEQ3ZkhHY3FGcDg4PRIkYzUyMmQwNTgtYjllNi01ZDYxLWE5NDktZWNmOWMyNjIzOGU2GAAgACgAMLzQqLziLzjc89edgDBA3PPXnYAwShx5ek5CMDFjbjU0QTdjUlUwdVQrL1BnbVR0VW89WgBlAAAAABKoAQgLEqMBChxHVkhKMDA2SllseGRPR1h2V3VsNXdMbE9jOGc9EiQzMTEwNDU2NC1hYjdjLTQ5ZTktOWE3ZC1jNThiOWQxZWVkNGIYACACKAIwz/z5msoxOP3CwKrVMEDS7/mayjFKHGNNd0QvNVpvNm5zdVNzMjRXU3JXSmFMVVJtOD1aHyId9kZINDkvUkVEbFR6dUkrQlJMUWZ2U0hURFlKTT1loGbb6BKoAQgMEqMBChxrYU9ZN0VyU2Rta01KU2FZbHBBbUpqQzkyTEE9EiRjMDk4NWE2Mi05ZTQ3LTRhNjEtOWUxYi1iYmExNGQ5M2NlNGIYACACKAIw0/z5msoxOJnEwKrVMEDS7/mayjFKHGtRM2g0NXoyVjh6bW4zN2JuSm83WWg3YkdCcz1aHyId+1Noa2czdWJsZFdNYUxJbzlxTnpuODBhUlZoND1lEDD/5BKoAQgKEqMBChxzRW5DLy80dGhIbjFTd0Exdjk1a2NqSUhyaTQ9EiRkYTc2Y2JkMS1iNmYxLTRjOGEtYjgyNi02MTQ2YTJlNDM2YTkYACACKAIwzfz5msoxOKzDwKrVMEDS7/mayjFKHHhycnF4c05McTRVeVk4VjVrbHFKdWdZN2xHZz1aHyId7FVSM3pCVXAwVjNXd1Z6aVppT09NUThIM05tVT1lG+5tqBKJAQgCEoQBChxZY1NUb252RVNQd3FDczRMMmNyVmh2NjhMOTg9EiQ0Y2E3YzEzNi1lNmI0LTVmZWItYjAyZC0zZjI1NzhlNGJlZjgYACAAKAAwvNCovOIvOK3z152AMECt89edgDBKHG9QVmtod0JSYlY2NUtDV1IyK0lPTkhXb091OD1aAGUAAAAAEqgBCAgSowEKHHRhZy9NV1RldVI4Z09OUllMenliUVNZdUlvQT0SJDNmNjA5N2JkLTNmN2MtNGIwNy04Zjk0LTNhODgxNDM5MmNlMBgAIAIoAjDR/PmayjE4isTAqtUwQNHv+ZrKMUocSjFVbGh6bGVpTUJvTG5QYU9nVHlCWGpIU1NZPVofIh2zVVl1ODRkZmlGYzQxSngvNDFoaGhvRk5mbnRJPWU4+TkzEqgBCA4SowEKHFlRSmhGdmdPRkpobVpyc1UvN2NJT0lqdXgwZz0SJDVlMDdhMjFmLTkxNDAtNDAzOS1hODdiLWM4NTc1OGFjYzFhNhgAIAIoAjDM/PmayjE4r8LAqtUwQNPv+ZrKMUocMGw0SGFSK2kxVU5WbW1WRlg1eWE3TDJYTVpnPVofIh3+WU1KRGtVY0p1dGc0S3FPVDFhVUVyTElvTzRvPWX0IvUbEqgBCAkSowEKHDFQQkUxZlZTVHZ3RnE1d3ZJL1lyRXMwcFRTQT0SJGViNDU5MzJmLTUwNjItNGJiOS1iNzg0LWY1ZmYyMDVmMDA4ZBgAIAIoAjDL/PmayjE46sPAqtUwQNHv+ZrKMUocaGg3TTJCaERsWFh3T0N0dUgrVnVweHlZTTJBPVofIh3ZdUVyZDRGZ1dSU0dYQ2t2czZINHc5SmVoNjlvPWWV6lucEqcBCAcSogEKHHRIdUhtOGs0ZUpIaFV5SUlwOHpwVlFmWnVubz0SJDgxZjIzMjc0LTg5NDItNGI1MC04NmMxLTgxZTkxZjQ1Yzk4YRgAIAIoAjDO/PmayjE4uMTAqtUwQNHv+ZrKMUocd0xjYVR3SEZUa1d0NGpRbWpPRm5ubC8xeXpzPVoeIhxnMVloZi9MUzRuMEc0Z1FaMGV4aVJMdHZRTkE9ZcWtgNUSiQEIARKEAQoceXhKLzZmdmtlY3I3a3A1RVF6QjR0V0xwZGJFPRIkMTIxOGQ2MzctNWI1MC01ZTVlLWFiOWItNDlmMzMzMTNiZTQ3GAAgACgAMLzQqLziLzid89edgDBAnfPXnYAwShxhUkNXTGdoRjliNUlucUtJRHZ1Si9qdlFrRmM9WgBlAAAAADAAOAA=",
+   "version": 1
+}
