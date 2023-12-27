@@ -3,6 +3,7 @@ import 'package:admin/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../constants.dart';
 
@@ -33,6 +34,11 @@ class Header extends StatelessWidget {
     );
   }
 }
+class User {
+  final String? name;
+
+  User({this.name});
+}
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard({
@@ -41,33 +47,59 @@ class ProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(left: defaultPadding),
-      padding: EdgeInsets.symmetric(
-        horizontal: defaultPadding,
-        vertical: defaultPadding / 2,
-      ),
-      decoration: BoxDecoration(
-        color: secondaryColor,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-        border: Border.all(color: Colors.white10),
-      ),
-      child: Row(
-        children: [
-          Image.asset(
-            "assets/images/profile_pic.png",
-            height: 38,
-          ),
-          if (!Responsive.isMobile(context))
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-              child: Text("Angelina Jolie"),
+    return FutureBuilder<User?>(
+      future: getUserDetails(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else if (!snapshot.hasData) {
+          return Text('User details not found');
+        } else {
+          final user = snapshot.data!;
+
+          return Container(
+            margin: EdgeInsets.only(left: defaultPadding),
+            padding: EdgeInsets.symmetric(
+              horizontal: defaultPadding,
+              vertical: defaultPadding / 2,
             ),
-          Icon(Icons.keyboard_arrow_down),
-        ],
-      ),
+            decoration: BoxDecoration(
+              color: secondaryColor,
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              border: Border.all(color: Colors.white10),
+            ),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  backgroundImage: AssetImage("assets/software-engineer.png"),
+                  radius: 19,
+                ),
+                if (!Responsive.isMobile(context))
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: defaultPadding / 2),
+                    child: Text(user.name ?? 'User Name'),
+                  ),
+                Icon(Icons.keyboard_arrow_down),
+              ],
+            ),
+          );
+        }
+      },
     );
+  }
+}
+
+Future<User?> getUserDetails() async {
+  try {
+    final prefs = await SharedPreferences.getInstance();
+    final name = prefs.getString('name') ?? 'Angelina Jolie';
+    return User(name: name);
+  } catch (e) {
+    print('Error retrieving user details from local storage: $e');
+    return null;
   }
 }
 

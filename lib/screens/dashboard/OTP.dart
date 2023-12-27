@@ -1,14 +1,9 @@
 
 
-
-
-
-
-
-
-
 import 'package:flutter/material.dart';
 
+import '../../models/otp_model.dart';
+import '../../services/OtpService.dart';
 import 'register_screen.dart';
 import 'resertPassword.dart';
 class OTP extends StatelessWidget {
@@ -92,11 +87,30 @@ class _FormContent extends StatefulWidget {
 }
 
 class __FormContentState extends State<_FormContent> {
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _otpController = TextEditingController();
+
+
   bool _isPasswordVisible = false;
   bool _rememberMe = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  Future<void> _verifyOtp() async {
+    final numTel = _phoneNumberController.text;
+    final otp = _otpController.text;
 
+    try {
+      // Call the backend service to verify OTP
+      await AuthService.verifyOtp(numTel, otp);
+
+      // OTP verified successfully, you can navigate to the next screen or perform other actions
+      print('OTP verified');
+
+    } catch (e) {
+      // Handle errors
+      print('Error: $e');
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -148,6 +162,26 @@ class __FormContentState extends State<_FormContent> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextFormField(
+                   controller: _phoneNumberController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your phone number';
+                      }
+                      // Add more validation if needed
+                      return null;
+                    },
+                    keyboardType: TextInputType.phone,
+                    decoration: const InputDecoration(
+                      labelText: 'Phone Number',
+                      hintText: 'Enter your Phone Number',
+                      prefixIcon: Icon(Icons.phone),
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  _gap(),
+                  TextFormField(
+                    controller: _otpController,
+
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter some text';
@@ -174,16 +208,14 @@ class __FormContentState extends State<_FormContent> {
                         ),
                       ),
                       onPressed: () {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          // Navigate to ProfilePage1
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => resetPassword(),
-                            ),
-                          );
-                        }
-                      },
+                        _verifyOtp();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => resetPassword(),
+                          ),
+                        );
+                        },
                       child: const Padding(
                         padding: EdgeInsets.all(10.0),
                         child: Text(

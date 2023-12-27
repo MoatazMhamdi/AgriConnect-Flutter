@@ -302,7 +302,7 @@ class __FormContentState extends State<_FormContent> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SignInPage2(),
+                          builder: (context) => SignInPage(),
                         ),
                       );
                     },
@@ -343,7 +343,7 @@ class __FormContentState extends State<_FormContent> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => SignInPage2(),
+                      builder: (context) => SignInPage(),
                     ),
                   );
                 },

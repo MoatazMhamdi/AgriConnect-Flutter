@@ -1,12 +1,12 @@
 import 'package:admin/screens/dashboard/user_detail_screen.dart';
+import 'package:admin/screens/dashboard/dashboard_screen.dart';
+import 'package:admin/screens/dashboard/equipment_screen.dart';
+import 'package:admin/screens/dashboard/maintenance_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-
-import '../../dashboard/dashboard_screen.dart';
-import '../../dashboard/equipment_screen.dart';
-import '../../dashboard/maintenance_screen.dart';
-
+import '../../../services/AuthService.dart';
+import '../../dashboard/login_screen.dart';
 import '../main_screen.dart';
 
 class SideMenu extends StatelessWidget {
@@ -26,14 +26,13 @@ class SideMenu extends StatelessWidget {
             title: "Dashboard",
             svgSrc: "assets/icons/menu_dashboard.svg",
             press: () {
-
+              // Handle Dashboard press
             },
           ),
           DrawerListTile(
             title: "Maintenance",
             svgSrc: "assets/icons/menu_task.svg",
             press: () {
-              // Naviguer vers la vue Task
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => MaintenanceScreen()),
@@ -41,10 +40,9 @@ class SideMenu extends StatelessWidget {
             },
           ),
           DrawerListTile(
-            title: "Equipment", // Ajouter l'élément Equipment
+            title: "Equipment",
             svgSrc: "assets/icons/menu_equipment.svg",
             press: () {
-              // Naviguer vers la vue Equipment
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => EquipmentScreen()),
@@ -54,7 +52,9 @@ class SideMenu extends StatelessWidget {
           DrawerListTile(
             title: "Notification",
             svgSrc: "assets/icons/menu_notification.svg",
-            press: () {},
+            press: () {
+              // Handle Notification press
+            },
           ),
           DrawerListTile(
             title: "Profile",
@@ -69,18 +69,48 @@ class SideMenu extends StatelessWidget {
           DrawerListTile(
             title: "Settings",
             svgSrc: "assets/icons/menu_setting.svg",
-            press: () {},
+            press: () {
+              // Handle Settings press
+            },
+          ),
+          // Add the Logout button
+          DrawerListTile(
+            title: "Logout",
+            svgSrc: "assets/icons/menu_logout.svg", // You can use a logout icon
+            press: () {
+              // Implement the logout functionality here
+              // For example, clear the user session and navigate to the login screen
+              // You can customize this part based on your authentication logic
+              // Here's a simple example:
+              _handleLogout(context);
+            },
           ),
         ],
       ),
     );
+  }
+
+  Future<void> _handleLogout(BuildContext context) async {
+    final authService = AuthService();
+    try {
+      // Call the logout method
+      await authService.logout();
+
+      // Navigate to the login screen
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => SignInPage()),
+            (route) => false,
+      );
+    } catch (e) {
+      print('Error during logout: $e');
+    }
   }
 }
 
 class DrawerListTile extends StatelessWidget {
   const DrawerListTile({
     Key? key,
-    // For selecting those three line once press "Command+D"
     required this.title,
     required this.svgSrc,
     required this.press,

@@ -1,10 +1,15 @@
-import 'package:admin/mainscreeninterface.dart';
+// Import necessary packages and classes
 import 'package:flutter/material.dart';
-import 'register_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'login_screen.dart';
+import 'package:admin/services/AuthService.dart';
+import '/models/User_Login.dart';  // Adjust the import based on the actual path and file name
 import 'ForgetPassword.dart';
+import 'register_screen.dart';
+import 'package:admin/mainscreeninterface.dart';
 
-class SignInPage2 extends StatelessWidget {
-  const SignInPage2({Key? key}) : super(key: key);
+class SignInPage extends StatelessWidget {
+  const SignInPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +26,14 @@ class SignInPage2 extends StatelessWidget {
         ),
         child: Center(
           child: isSmallScreen
-              ? Column(
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              _Logo(),
-              _FormContent(),
-            ],
+              ? SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                _Logo(),
+                _FormContent(),
+              ],
+            ),
           )
               : Container(
             padding: const EdgeInsets.all(32.0),
@@ -111,6 +118,9 @@ class __FormContentState extends State<_FormContent> {
   bool _rememberMe = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final AuthService _authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -143,29 +153,18 @@ class __FormContentState extends State<_FormContent> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextFormField(
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
+                    controller: _phoneNumberController,
 
-                      bool emailValid = RegExp(
-                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
-                      ).hasMatch(value);
-                      if (!emailValid) {
-                        return 'Please enter a valid email';
-                      }
-
-                      return null;
-                    },
                     decoration: const InputDecoration(
-                      labelText: 'Email',
-                      hintText: 'Enter your email',
-                      prefixIcon: Icon(Icons.email_outlined),
+                      labelText: 'User Name',
+                      hintText: 'Enter your Psudo',
+                      prefixIcon: Icon(Icons.supervised_user_circle_rounded),
                       border: OutlineInputBorder(),
                     ),
                   ),
                   _gap(),
                   TextFormField(
+                    controller: _passwordController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter some text';
@@ -208,11 +207,89 @@ class __FormContentState extends State<_FormContent> {
                           });
                         },
                       ),
-                      Text('Remember me'),
-                      Spacer(),
+                      Text(
+                        'Remember me',
+                        style: TextStyle(
+                          color: Colors.black87,
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.normal,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                  _gap(),
+                  Row(
+                    children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.black45,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                        ),
+                        onPressed: () async {
+                          if (_formKey.currentState?.validate() ?? false) {
+                            final phoneNumber =
+                                _phoneNumberController.text;
+                            final password = _passwordController.text;
+
+                            try {
+                              // Call your login service here using phoneNumber and password
+                              final user = await _authService.login(phoneNumber, password);
+
+                              if (user != null) {
+                                // Handle successful login
+                                // Save user details to local storage
+                                await saveUserDetailsToLocal(user);
+
+                                // Navigate to MainScreenInterface on successful login
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MainScreenInterface(),
+                                  ),
+                                      (route) => false, // This removes all previous routes from the stack
+                                );
+                              } else {
+                                // Handle the case where the user data is null (login failed)
+                                print('Login failed');
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('Login failed. Please check your credentials.'),
+                                    duration: Duration(seconds: 3),
+                                  ),
+                                );
+                              }
+
+                            } catch (error) {
+                              // Handle network or other errors
+                              print('Error during login: $error');
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('An error occurred during login. Please try again later.'),
+                                  duration: Duration(seconds: 3),
+                                ),
+                              );
+                            }
+                          }
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text(
+                            'Sign in',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                        ),
+                      ),
+                      _gap(),
                       TextButton(
                         onPressed: () {
-                          // Navigate to ForgetPassword screen
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -233,41 +310,6 @@ class __FormContentState extends State<_FormContent> {
                     ],
                   ),
                   _gap(),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.black45,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                      ),
-                      onPressed: () {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          // Navigate to ProfilePage1
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => MainScreenInterface(),
-                            ),
-                          );
-                        }
-                      },
-                      child: const Padding(
-                        padding: EdgeInsets.all(10.0),
-                        child: Text(
-                          'Sign in',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  _gap(),
                   TextButton(
                     onPressed: () {
                       Navigator.push(
@@ -278,7 +320,7 @@ class __FormContentState extends State<_FormContent> {
                       );
                     },
                     child: Text(
-                      'Create an account!',
+                      'Don\'t have an account? Sign up!',
                       style: TextStyle(
                         color: Colors.black87,
                         fontFamily: 'Montserrat',
@@ -297,4 +339,14 @@ class __FormContentState extends State<_FormContent> {
   }
 
   Widget _gap() => const SizedBox(height: 16);
+
+  Future<void> saveUserDetailsToLocal(User user) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString('name', user.name);
+      prefs.setString('password', user.password);
+    } catch (e) {
+      print('Error saving user details to local storage: $e');
+    }
+  }
 }

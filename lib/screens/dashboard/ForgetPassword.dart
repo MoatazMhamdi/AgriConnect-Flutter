@@ -7,7 +7,9 @@
 
 
 
+import 'package:admin/services/AuthService.dart';
 import 'package:flutter/material.dart';
+import '../../models/otp_model.dart';
 import 'register_screen.dart';
 import 'OTP.dart';
 
@@ -92,11 +94,38 @@ class _FormContent extends StatefulWidget {
 }
 
 class __FormContentState extends State<_FormContent> {
+  final TextEditingController _phoneNumberController = TextEditingController();
+
   bool _isPasswordVisible = false;
   bool _rememberMe = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  Future<void> _submitForm() async {
+    if (_formKey.currentState?.validate() ?? false) {
+      final numTel = _phoneNumberController.text;
 
+      try {
+        // Call the backend service to send OTP
+        // Replace 'your_backend_base_url' with the actual backend URL
+        final OtpModel otpModel = await AuthService.forgetPassword(numTel);
+
+        // Handle the OTP, you can navigate to the OTP screen or do something else
+        final otp = otpModel.otp;
+        print('Received OTP: $otp');
+
+        // Navigate to the OTP screen
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => OTP(),
+          ),
+        );
+      } catch (e) {
+        // Handle errors
+        print('Error: $e');
+      }
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -148,24 +177,19 @@ class __FormContentState extends State<_FormContent> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextFormField(
+                    controller: _phoneNumberController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
+                        return 'Please enter your phone number';
                       }
-
-                      bool emailValid = RegExp(
-                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
-                      ).hasMatch(value);
-                      if (!emailValid) {
-                        return 'Please enter a valid email';
-                      }
-
+                      // Add more validation if needed
                       return null;
                     },
+                    keyboardType: TextInputType.phone,
                     decoration: const InputDecoration(
-                      labelText: 'Email',
-                      hintText: 'Enter your email',
-                      prefixIcon: Icon(Icons.email_outlined),
+                      labelText: 'Phone Number',
+                      hintText: 'Enter your Phone Number',
+                      prefixIcon: Icon(Icons.phone),
                       border: OutlineInputBorder(),
                     ),
                   ),
@@ -181,15 +205,9 @@ class __FormContentState extends State<_FormContent> {
                         ),
                       ),
                       onPressed: () {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          // Navigate to ProfilePage1
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => OTP(),
-                            ),
-                          );
-                        }
+                        _submitForm(); // Call the asynchronous function
+
+
                       },
                       child: const Padding(
                         padding: EdgeInsets.all(10.0),

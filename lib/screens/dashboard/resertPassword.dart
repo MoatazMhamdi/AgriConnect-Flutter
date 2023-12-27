@@ -2,12 +2,8 @@
 
 
 
-
-
-
-
-
 import 'package:flutter/material.dart';
+import '../../services/resetPassword.dart';
 import 'register_screen.dart';
 import 'login_screen.dart';
 
@@ -92,10 +88,33 @@ class _FormContent extends StatefulWidget {
 }
 
 class __FormContentState extends State<_FormContent> {
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _newPasswordController = TextEditingController();
   bool _isPasswordVisible = false;
   bool _rememberMe = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  Future<void> _resetPassword() async {
+    final numTel = _phoneNumberController.text;
+    final newPassword = _newPasswordController.text;
+
+    try {
+      final resetPasswordResponse = await AuthService.resetPassword(numTel, newPassword);
+
+      // Password reset successfully, you can handle the response as needed
+      print('Password reset: ${resetPasswordResponse.message}');
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SignInPage(),
+        ),
+      );
+      //print('User details: ${resetPasswordResponse.user}');
+    } catch (e) {
+      // Handle errors
+      print('Error: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,6 +167,8 @@ class __FormContentState extends State<_FormContent> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextFormField(
+                    controller: _phoneNumberController,
+
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter some text';
@@ -164,6 +185,8 @@ class __FormContentState extends State<_FormContent> {
                   ),
                   _gap(),
                   TextFormField(
+                    controller: _newPasswordController,
+
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter some text';
@@ -206,15 +229,8 @@ class __FormContentState extends State<_FormContent> {
                         ),
                       ),
                       onPressed: () {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          // Navigate to ProfilePage1
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SignInPage2(),
-                            ),
-                          );
-                        }
+                        _resetPassword();
+
                       },
                       child: const Padding(
                         padding: EdgeInsets.all(10.0),

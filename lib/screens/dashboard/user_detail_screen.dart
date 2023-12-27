@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class User {
+  final String? name;
+
+  User({this.name});
+}
 
 class UserDetailScreen extends StatelessWidget {
   UserDetailScreen();
@@ -21,37 +28,56 @@ class UserDetailScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  Text(
-                    "Richie Lorie", // Vous pouvez remplacer ceci par les informations réelles de l'utilisateur
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline6
-                        ?.copyWith(fontWeight: FontWeight.bold),
+                  FutureBuilder<User?>(
+                    future: getUserDetails(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return CircularProgressIndicator();
+                      } else if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      } else if (!snapshot.hasData) {
+                        return Text('User details not found');
+                      } else {
+                        final user = snapshot.data!;
+
+                        return Column(
+                          children: [
+                            Text(
+                              user.name ?? 'User Name',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6
+                                  ?.copyWith(fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(height: 16),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                FloatingActionButton.extended(
+                                  onPressed: () {},
+                                  heroTag: 'follow',
+                                  elevation: 0,
+                                  label: const Text("Follow"),
+                                  icon: const Icon(Icons.person_add_alt_1),
+                                ),
+                                const SizedBox(width: 16.0),
+                                FloatingActionButton.extended(
+                                  onPressed: () {},
+                                  heroTag: 'mesage',
+                                  elevation: 0,
+                                  backgroundColor: Colors.red,
+                                  label: const Text("Message"),
+                                  icon: const Icon(Icons.message_rounded),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 16),
+                            const _ProfileInfoRow(),
+                          ],
+                        );
+                      }
+                    },
                   ),
-                  const SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      FloatingActionButton.extended(
-                        onPressed: () {},
-                        heroTag: 'follow',
-                        elevation: 0,
-                        label: const Text("Follow"),
-                        icon: const Icon(Icons.person_add_alt_1),
-                      ),
-                      const SizedBox(width: 16.0),
-                      FloatingActionButton.extended(
-                        onPressed: () {},
-                        heroTag: 'mesage',
-                        elevation: 0,
-                        backgroundColor: Colors.red,
-                        label: const Text("Message"),
-                        icon: const Icon(Icons.message_rounded),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  const _ProfileInfoRow()
                 ],
               ),
             ),
@@ -59,6 +85,17 @@ class UserDetailScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<User?> getUserDetails() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final name = prefs.getString('name') ?? 'Richie Lorie';
+      return User(name: name);
+    } catch (e) {
+      print('Error retrieving user details from local storage: $e');
+      return null;
+    }
   }
 }
 
@@ -80,12 +117,14 @@ class _ProfileInfoRow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: _items
             .map((item) => Expanded(
-            child: Row(
-              children: [
-                if (_items.indexOf(item) != 0) const VerticalDivider(),
-                Expanded(child: _singleItem(context, item)),
-              ],
-            )))
+          child: Row(
+            children: [
+              if (_items.indexOf(item) != 0)
+                const VerticalDivider(),
+              Expanded(child: _singleItem(context, item)),
+            ],
+          ),
+        ))
             .toList(),
       ),
     );
@@ -144,12 +183,13 @@ class _TopPortion extends StatelessWidget {
                   decoration: const BoxDecoration(
                     color: Colors.black,
                     shape: BoxShape.circle,
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                            'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80')),
+                  ),
+                  child: Image.asset(
+                    'assets/images/software-engineer.png',
+                    fit: BoxFit.cover,
                   ),
                 ),
+
                 Positioned(
                   bottom: 0,
                   right: 0,
