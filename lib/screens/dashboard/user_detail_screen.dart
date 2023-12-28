@@ -1,5 +1,9 @@
+import 'package:admin/screens/dashboard/UserScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../services/AuthService.dart';
+import 'login_screen.dart';
 
 class User {
   final String? name;
@@ -54,20 +58,29 @@ class UserDetailScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 FloatingActionButton.extended(
-                                  onPressed: () {},
-                                  heroTag: 'follow',
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => UserScreen(),
+                                      ),
+                                    );
+                                  },
+                                  heroTag: 'Users List',
                                   elevation: 0,
-                                  label: const Text("Follow"),
-                                  icon: const Icon(Icons.person_add_alt_1),
+                                  label: const Text("Users List"),
+                                  icon: const Icon(Icons.format_list_numbered_outlined),
                                 ),
                                 const SizedBox(width: 16.0),
                                 FloatingActionButton.extended(
-                                  onPressed: () {},
-                                  heroTag: 'mesage',
+                                  onPressed: () {
+                                     _handleLogout(context);
+                                  },
+                                  heroTag: 'Logout',
                                   elevation: 0,
                                   backgroundColor: Colors.red,
-                                  label: const Text("Message"),
-                                  icon: const Icon(Icons.message_rounded),
+                                  label: const Text("Logout"),
+                                  icon: const Icon(Icons.logout),
                                 ),
                               ],
                             ),
@@ -98,20 +111,32 @@ class UserDetailScreen extends StatelessWidget {
     }
   }
 }
+Future<void> _handleLogout(BuildContext context) async {
+  final authService = AuthService();
+  try {
+    // Call the logout method
+    await authService.logout();
+
+    // Navigate to the login screen
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => SignInPage()),
+          (route) => false,
+    );
+  } catch (e) {
+    print('Error during logout: $e');
+  }
+}
 
 class _ProfileInfoRow extends StatelessWidget {
   const _ProfileInfoRow({Key? key}) : super(key: key);
 
-  final List<ProfileInfoItem> _items = const [
-    ProfileInfoItem("Posts", 900),
-    ProfileInfoItem("Followers", 120),
-    ProfileInfoItem("Following", 200),
-  ];
+
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
+    /*  height: 80,
       constraints: const BoxConstraints(maxWidth: 400),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -126,7 +151,7 @@ class _ProfileInfoRow extends StatelessWidget {
           ),
         ))
             .toList(),
-      ),
+      ),*/
     );
   }
 
