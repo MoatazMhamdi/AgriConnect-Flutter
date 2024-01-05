@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../services/AuthService.dart';
+import '../../dashboard/components/BlogScreen.dart';
 import '../../dashboard/login_screen.dart';
 import '../main_screen.dart';
 
@@ -65,6 +66,16 @@ class SideMenu extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => UserDetailScreen()),
               );
             },
+          ),
+          DrawerListTile(
+            title: "Blog",
+            svgSrc: "assets/icons/menu_doc.svg",
+            press: () {
+                      Navigator.push(
+                        context,
+                MaterialPageRoute(builder: (context) => BlogScreen()),
+    );
+    },
           ),
           DrawerListTile(
             title: "Settings",

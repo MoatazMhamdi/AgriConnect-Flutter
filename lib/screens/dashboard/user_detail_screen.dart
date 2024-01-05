@@ -1,8 +1,6 @@
-import 'package:admin/models/EditUser.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../services/AuthService.dart';
-import '../../services/editService.dart';
 import 'login_screen.dart';
 import 'UserScreen.dart';
 

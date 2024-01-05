@@ -1,5 +1,5 @@
 class User {
-  final String userId;
+  final String? userId;
   final String name;
   final String? email;
   final String? numTel;
@@ -7,7 +7,7 @@ class User {
   final String? role;
 
   User({
-    required this.userId,
+    this.userId,
     required this.name,
     this.email,
     this.numTel,
@@ -19,7 +19,7 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) {
 
     return User(
-      userId: json['_id'] ?? '' ,
+      userId: json['_id'] ,
       name: json['name'] ?? '',
       email: json['email'] ,
       numTel: json['numTel'] ,

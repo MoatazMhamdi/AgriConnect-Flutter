@@ -118,7 +118,7 @@ class __FormContentState extends State<_FormContent> {
   bool _rememberMe = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final AuthService _authService = AuthService();
 
@@ -153,7 +153,7 @@ class __FormContentState extends State<_FormContent> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextFormField(
-                    controller: _nameController,
+                    controller: _phoneNumberController,
 
                     decoration: const InputDecoration(
                       labelText: 'User Name',
@@ -230,13 +230,13 @@ class __FormContentState extends State<_FormContent> {
                         ),
                         onPressed: () async {
                           if (_formKey.currentState?.validate() ?? false) {
-                            final name =
-                                _nameController.text;
+                            final phoneNumber =
+                                _phoneNumberController.text;
                             final password = _passwordController.text;
 
                             try {
                               // Call your login service here using phoneNumber and password
-                              final user = await _authService.login(name, password);
+                              final user = await _authService.login(phoneNumber, password);
 
                               if (user != null) {
                                 // Handle successful login
