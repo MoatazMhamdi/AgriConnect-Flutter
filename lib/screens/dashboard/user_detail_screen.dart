@@ -1,14 +1,17 @@
-import 'package:admin/screens/dashboard/UserScreen.dart';
+import 'package:admin/models/EditUser.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../services/AuthService.dart';
+import '../../services/editService.dart';
 import 'login_screen.dart';
+import 'UserScreen.dart';
 
 class User {
+  final String? userId;  // Add this line to define the 'id' property
+
   final String? name;
 
-  User({this.name});
+  User({this.userId ,this.name});
 }
 
 class UserDetailScreen extends StatelessWidget {
@@ -46,12 +49,26 @@ class UserDetailScreen extends StatelessWidget {
 
                         return Column(
                           children: [
-                            Text(
-                              user.name ?? 'User Name',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline6
-                                  ?.copyWith(fontWeight: FontWeight.bold),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                // Edit icon button
+                                IconButton(
+                                  icon: Icon(Icons.edit),
+                                  onPressed: () {
+                                    // Show the edit user dialog
+                                    _showEditUserDialog(context, user);
+                                  },
+                                ),
+                                // User name text
+                                Text(
+                                  user.name ?? 'User Name',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6
+                                      ?.copyWith(fontWeight: FontWeight.bold),
+                                ),
+                              ],
                             ),
                             const SizedBox(height: 16),
                             Row(
@@ -74,7 +91,7 @@ class UserDetailScreen extends StatelessWidget {
                                 const SizedBox(width: 16.0),
                                 FloatingActionButton.extended(
                                   onPressed: () {
-                                     _handleLogout(context);
+                                    _handleLogout(context);
                                   },
                                   heroTag: 'Logout',
                                   elevation: 0,
@@ -103,53 +120,69 @@ class UserDetailScreen extends StatelessWidget {
   Future<User?> getUserDetails() async {
     try {
       final prefs = await SharedPreferences.getInstance();
+      final userId = prefs.getString('userId');
+
+      if (userId == null) {
+        // Handle the case where user ID is not found
+        return null;
+      }
+
       final name = prefs.getString('name') ?? 'Richie Lorie';
-      return User(name: name);
+      return User(userId: userId, name: name);
     } catch (e) {
       print('Error retrieving user details from local storage: $e');
       return null;
     }
   }
-}
-Future<void> _handleLogout(BuildContext context) async {
-  final authService = AuthService();
-  try {
-    // Call the logout method
-    await authService.logout();
 
-    // Navigate to the login screen
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => SignInPage()),
-          (route) => false,
+
+  void _showEditUserDialog(BuildContext context, User user) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return EditUserDialog(user: user);
+      },
     );
-  } catch (e) {
-    print('Error during logout: $e');
+  }
+
+  Future<void> _handleLogout(BuildContext context) async {
+    final authService = AuthService();
+    try {
+      // Call the logout method
+      await authService.logout();
+
+      // Navigate to the login screen
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => SignInPage()),
+            (route) => false,
+      );
+    } catch (e) {
+      print('Error during logout: $e');
+    }
   }
 }
 
 class _ProfileInfoRow extends StatelessWidget {
   const _ProfileInfoRow({Key? key}) : super(key: key);
 
-
-
   @override
   Widget build(BuildContext context) {
     return Container(
-    /*  height: 80,
+      /*  height: 80,
       constraints: const BoxConstraints(maxWidth: 400),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: _items
             .map((item) => Expanded(
-          child: Row(
-            children: [
-              if (_items.indexOf(item) != 0)
-                const VerticalDivider(),
-              Expanded(child: _singleItem(context, item)),
-            ],
-          ),
-        ))
+              child: Row(
+                children: [
+                  if (_items.indexOf(item) != 0)
+                    const VerticalDivider(),
+                  Expanded(child: _singleItem(context, item)),
+                ],
+              ),
+            ))
             .toList(),
       ),*/
     );
@@ -214,7 +247,6 @@ class _TopPortion extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-
                 Positioned(
                   bottom: 0,
                   right: 0,
@@ -241,4 +273,74 @@ class ProfileInfoItem {
   final String title;
   final int value;
   const ProfileInfoItem(this.title, this.value);
+}
+
+class EditUserDialog extends StatefulWidget {
+  final User user;
+
+  const EditUserDialog({required this.user});
+
+  @override
+  _EditUserDialogState createState() => _EditUserDialogState();
+}
+
+class _EditUserDialogState extends State<EditUserDialog> {
+  late TextEditingController _nameController;
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController = TextEditingController(text: widget.user.name);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text('Edit User Name'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextField(
+            controller: _nameController,
+            decoration: InputDecoration(labelText: 'New User Name'),
+          ),
+          SizedBox(height: 16),
+          ElevatedButton(
+            onPressed: () {
+              // Add logic for handling the edit button press
+              // For example, update the user name and close the dialog
+              _handleEditUserName(context);
+            },
+            child: Text('Edit'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _handleEditUserName(BuildContext context) async {
+    try {
+      // Get the user details from local storage
+      final prefs = await SharedPreferences.getInstance();
+      final userId = prefs.getString('userId') ?? ''; // Provide a default value
+
+      // Make the API request to update the user name
+      await AuthService.updateUserName(userId, _nameController.text);
+
+      // Close the dialog
+      Navigator.pop(context);
+
+      // Trigger a refresh of the user details
+
+    } catch (error) {
+      print('Failed to update user name: $error');
+      // Handle error, show a snackbar, etc.
+    }
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
+  }
 }

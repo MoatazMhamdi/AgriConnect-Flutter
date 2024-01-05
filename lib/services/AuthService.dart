@@ -26,6 +26,7 @@ class AuthService {
           // Adjust the following lines based on the actual fields in your response
           final userId = data['userId'];
           final message = data['message'];
+          await saveUserIdToLocalStorage(userId);
 
           // Save the JWT token to local storage
           await saveJwtToLocalStorage(data['jwt']);
@@ -47,7 +48,14 @@ class AuthService {
       return null;
     }
   }
-
+  Future<void> saveUserIdToLocalStorage(String userId) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('userId', userId);
+    } catch (e) {
+      throw Exception('Error saving userId to local storage: $e');
+    }
+  }
 
   Future<void> saveJwtToLocalStorage(String jwt) async {
     try {
@@ -125,5 +133,30 @@ class AuthService {
       print('Failed to verify OTP. Status code: ${response.statusCode}');
       print('Response body: ${response.body}');
       throw Exception('Failed to verify OTP');    }
+  }
+  static Future<void> updateUserName(String userId, String newName) async {
+    try {
+      final response = await http.patch(
+        Uri.parse('$baseUrl/users/editName/$userId'), // Replace with your API endpoint
+        headers: {
+          'Content-Type': 'application/json',
+          // Add any additional headers as needed
+        },
+        body: jsonEncode({
+          'name': newName,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        // Successful update, handle as needed
+        print('User name updated successfully');
+      } else {
+        // Handle error, show a snackbar, etc.
+        print('Failed to update user name. Status code: ${response.statusCode}');
+      }
+    } catch (error) {
+      print('Error updating user name: $error');
+      // Handle error, show a snackbar, etc.
+    }
   }
 }

@@ -17,8 +17,9 @@ class User {
   final String? password;
   final String? numTel;
   final String? role;
+  final bool? isBanned;
 
-  User({this.id, this.name, this.email, this.password, this.numTel, this.role});
+  User({this.id, this.name, this.email, this.password, this.numTel, this.role, this.isBanned});
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
@@ -28,6 +29,8 @@ class User {
       password: json['password'],
       numTel: json['numTel'],
       role: json['role'],
+      isBanned: json['isBanned'] ?? false,
+
     );
   }
 }
